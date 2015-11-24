@@ -23,7 +23,6 @@ aria_token="Qwerty12"
 aria_conf_path=cesclient_conf_dir+"/aria2c.conf"
 aria_daemon_log = log_dir+"/aria2c.log"
 aria_daemon_on_complete=cesclient_home_dir+"/python/aria_on_complete.py"
-# " -l " + aria_daemon_log +
 aria_cmd = aria_bin +" --rpc-secret="+aria_token+" -d "+download_dir+" --on-download-complete="+aria_daemon_on_complete + " --conf-path="+aria_conf_path
 aria_pidfile = log_dir +'/aria2c.pid'
 
