@@ -1,7 +1,7 @@
-# 2015-11-24 12:01
+# 2015-11-24 17:32
 
 version_image=10
-version_soft=1
+version_soft=2
 
 
 uuid="13cab633-7c94-471c-918a-2fa2991aa3fe"
