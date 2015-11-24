@@ -3,6 +3,7 @@ import sys
 import config
 import codecs
 import logging
+import logging.config
 
 import aria.rpc
 import aria.daemon
@@ -21,21 +22,9 @@ def if_file_downloaded(filename, size):
 
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 
+logging.config.fileConfig(config.cesclient_log_config,disable_existing_loggers=False)
+
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
-
-fh = logging.FileHandler(config.log_dir+'/cesclient_main.log')
-fh.setLevel(logging.DEBUG)
-
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-
-formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
-ch.setFormatter(formatter)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s','%Y-%m-%d %H:%M:%S')
-fh.setFormatter(formatter)
-logger.addHandler(ch)
-logger.addHandler(fh)
 
 logger.info('starting main script...')
 
