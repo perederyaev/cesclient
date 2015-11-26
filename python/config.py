@@ -3,7 +3,8 @@
 version_image=10
 version_soft=2
 
-uuid="13cab633-7c94-471c-918a-2fa2991aa3fe"
+#uuid="498543d5-1f22-4682-a4fb-b1a42a1bcfff" #prod
+uuid="13cab633-7c94-471c-918a-2fa2991aa3fe"  #dev
 token="0dcb49b33a09b9ddee431067c7d3b249"
 
 cesclient_home_dir="/opt/cesclient"

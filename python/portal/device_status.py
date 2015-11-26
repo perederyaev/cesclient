@@ -15,7 +15,7 @@ def uptime():
             u=int(float(s))
             logging.debug("uptime - uptime_seconds="+str(u))
     except EnvironmentError as e:
-        logger.warning("uptime - can't read uptime from /proc/uptime:"+e.strerror)
+        logger.warning("uptime - can't read uptime from /proc/uptime: "+str(e.strerror))
     return u
 
 
@@ -38,9 +38,7 @@ def get_mem_info():
 def get_ip():
     ips=""
     try:
-        #raw = subprocess.check_output(['/sbin/ip', 'addr', 'show', 'dev', 'tap1'])
         raw = subprocess.check_output(['/sbin/ip', 'addr', 'show'])
-        #matched=re.search(r'inet\s+([\d|\.]+)\/', raw,re.MULTILINE)
         matched=re.findall(r'inet\s+([\d|\.]+)\/', raw,re.MULTILINE)
         if matched:
             for ip in matched:
@@ -49,8 +47,6 @@ def get_ip():
                         ips=ips+' vpn:'+ip
                     else:
                         ips=ips+' '+ip
-            #ip=matched.groups()[0]
-            #ip=matched.__str__()
     except:
         logger.warning("get_tap_ip - can't get tap1 ip")
     return str.strip(ips)
@@ -104,16 +100,17 @@ def send_device_status(url,data):
     logger.debug("send_device_status - json=" + json_obj)
     try:
         response = urllib2.urlopen(req, json_obj)
-        string = response.read()
-        json_obj=json.loads(string)
+        s = response.read()
+        json_obj=json.loads(s)
     except urllib2.HTTPError as e:
         logger.error("send_device_status - HTTPError: url=" + e.url + " code=" + str(e.code)+" message="+str(e.msg))
         return -1
-    except ValueError:
+    except ValueError as e:
+        logger.error("send_device_status - ValueError: " + str(e.message))
         return -1
     else:
         if json_obj['result'] != 'successful':
-            logger.warning("send_device_status warning: response=" + json_obj['message'])
+            logger.warning("send_device_status - response: " + json_obj['message'])
             return -1
         logger.info("send_device_status completed succesfully")
     return 0

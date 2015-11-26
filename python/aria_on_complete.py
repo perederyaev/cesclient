@@ -7,12 +7,12 @@ import logging
 import config
 import store.download
 
-logging.basicConfig(filename=config.log_dir+'/aria_on_complete.log',level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.config.fileConfig(config.cesclient_log_config,defaults={'logfilename': config.cesclient_log_dir+'/aria_on_complete.log'},disable_existing_loggers=False)
+
 
 print sys.argv
 
 if len(sys.argv) < 4:
-    print "Not enough command line params! Exiting.."
     logging.debug('Not enough command line params! Exiting..')
     sys.exit(1)
 

@@ -79,7 +79,7 @@ def main(aria_cmd, aria_pidfile):
     else:
         logger.info( "aria2c is not running! Starting aria2c daemon: " + aria_cmd)
         aria_pid = start_aria_daemon(aria_cmd)
-        logger.info( "aria2c pid=" + str(aria_pid) + " in file: " + aria_pidfile)
+        logger.debug( "aria2c pid=" + str(aria_pid) + " in file: " + aria_pidfile)
         write_aria_pid(aria_pidfile, aria_pid)
 
 

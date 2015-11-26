@@ -22,11 +22,11 @@ def if_file_downloaded(filename, size):
 
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 
-logging.config.fileConfig(config.cesclient_log_config,disable_existing_loggers=False)
+logging.config.fileConfig(config.cesclient_log_config,defaults={'logfilename': config.cesclient_log_dir+'/main.log'},disable_existing_loggers=False)
 
 logger = logging.getLogger()
 
-logger.info('starting main script...')
+logger.info('starting main script.')
 
 aria.daemon.main(config.aria_cmd,config.aria_pidfile)
 
@@ -34,6 +34,8 @@ assets = portal.queue.get_queue(config.portal_url_api_getqueue)
 if assets is None:
     logging.info("assets is None.")
     sys.exit(0)
+
+logger.debug(assets)
 
 assets_download_status = []
 for asset in assets:
@@ -46,6 +48,7 @@ for asset in assets:
     asset_downloaded_files = 0
     asset_total_files = len(asset['files'])
     for asset_file in asset['files']:
+        logger.debug(asset_file)
         asset_file_src_name = asset_file['src_name']
         asset_file_size = int(asset_file['size'])
         asset_file_name = asset_file['file_name']

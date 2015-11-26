@@ -10,10 +10,9 @@ def on_complete(filepath, filepath_ready):
                 logging.debug("symlink from:"+filepath+" to:"+filepath_ready+ " already exists")
                 return 1
         os.remove(filepath_ready)
-    logging.debug("symlinking completed file to ready dir -> from:"+filepath+" to:"+filepath_ready)
+    logging.info("symlinking completed file to ready dir -> from:"+filepath+" to:"+filepath_ready)
     os.symlink(filepath,filepath_ready)
     #shutil.move(filepath,filepath_ready)
-
 
 
 logger = logging.getLogger('store.download')
