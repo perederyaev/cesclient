@@ -22,6 +22,7 @@ chown -R cesbox.cesbox /mnt/storage/cesbox/portal/
 chmod g+w /mnt/storage/cesbox/portal/
 
 cp $HOME_DIR/conf/cesclient_lr.conf /etc/logrotate.d
+
 # uuid and token
 # wget -O cesclient_install.sh http://terra-media.ru/cesclient/install.sh
 # chmod +x cesclient_install.sh
